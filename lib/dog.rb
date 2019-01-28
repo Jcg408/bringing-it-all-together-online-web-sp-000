@@ -27,6 +27,7 @@ class Dog
     DB[:conn].execute(sql)
   end
   
+<<<<<<< HEAD
   def self.create(name:, breed:)
     dog = self.new(name: name, breed: breed)
     dog.save
@@ -40,12 +41,26 @@ class Dog
   end
   
   def self.find_by_id (id)
+=======
+  def self.create(hash)
+  new_dog = self.new(hash)
+  new_dog
+  end
+  
+  def self.new_from_db(row)
+    new_dog = self.new(row[0], row[1], row[2])
+    new_dog
+  end
+  
+def self.find_by_id(id)
+>>>>>>> cbadf9e1e114bf92f65978573e5f551f9679b464
     sql = <<-SQL
     SELECT * FROM dogs 
     WHERE id = ?
     SQL
 
     info = DB[:conn].execute(sql, id)[0]
+<<<<<<< HEAD
     self.new(id: info[0], name: info[1], breed: info[2])
   end
   
@@ -74,13 +89,27 @@ class Dog
   end 
   
   
+=======
+    
+    Dog.new(info[0], info[1], info[2])
+  end
+ 
+  
+  
+ 
+>>>>>>> cbadf9e1e114bf92f65978573e5f551f9679b464
   def save
     if self.id 
       self.update
     else
       sql = <<-SQL
+<<<<<<< HEAD
       INSERT INTO dogs (name, breed) 
       VALUES (?, ?)
+=======
+        INSERT INTO dogs (name, breed) 
+        VALUES (?, ?)
+>>>>>>> cbadf9e1e114bf92f65978573e5f551f9679b464
       SQL
  
       DB[:conn].execute(sql, self.name, self.breed)
@@ -89,7 +118,10 @@ class Dog
     self
   end
   
+<<<<<<< HEAD
   
+=======
+>>>>>>> cbadf9e1e114bf92f65978573e5f551f9679b464
   def update
     sql = <<-SQL
     UPDATE dogs
@@ -97,6 +129,15 @@ class Dog
     breed = ?
     WHERE id = ?
     SQL
+<<<<<<< HEAD
     DB[:conn].execute(sql, self.name, self.breed, self.id)
   end
+=======
+    
+   DB[:conn].execute(sql, self.name, self.breed, self.id)
+  end
+  
+  
+
+>>>>>>> cbadf9e1e114bf92f65978573e5f551f9679b464
 end
